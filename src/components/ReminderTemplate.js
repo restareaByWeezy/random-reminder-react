@@ -6,7 +6,7 @@ const ReminderTemplateBlock = styled.div`
   height: 768px;
 
   position: relative;
-  background: white;
+  background: #FAD5A5;
   border-radius: 16px;
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.04);
   margin: 0 auto;
