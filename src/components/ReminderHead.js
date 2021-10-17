@@ -15,6 +15,7 @@ const Title = styled.div`
 
 
 function ReminderHead() {
+
     function randomValueFromArray(array) {
         let random = Math.floor(Math.random() * array.length);
         return array[random];
@@ -22,7 +23,8 @@ function ReminderHead() {
     
     let list = JSON.parse(localStorage.getItem('listArr'))
     if(list == null){
-        const randomItem = ['리스트를 작성해주세요'];
+        let list = ['리스트를 작성해주세요'];
+        let randomItem = randomValueFromArray(list);
     } else 
     {
         let randomItem = randomValueFromArray(list);
