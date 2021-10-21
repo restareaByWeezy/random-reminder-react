@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
-import Lists from './Lists';
+
 
 const ListCreateBlock = styled.div`
   display: flex;
@@ -12,20 +12,17 @@ const ListCreateBlock = styled.div`
   border-bottom: 1px solid #e9ecef;
 `;
 
-function ListCreate() {
+function ListCreate(props) {
     const [text, setText] = useState('');
 
     const onChange = (e) => {
         setText(e.target.value);
       };
     const handleClick = () => {
-        let listArr= [];
-        if(JSON.parse(localStorage.getItem('listArr'))) {
-            listArr = JSON.parse(localStorage.getItem('listArr'))
-        }   
-            console.log(listArr);
-            listArr.push(text);
-            localStorage.setItem('listArr' , JSON.stringify(listArr));
+            let array = props.list;
+            array.push(text)
+            props.setList(array);
+            localStorage.setItem('listArr', JSON.stringify(array))
     }
     return (
         <ListCreateBlock>

@@ -1,6 +1,5 @@
-import react from 'react';
+import react, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import Lists from './Lists';
 
 const ReminderHeadBlock = styled.div`
     display: flex;
@@ -12,34 +11,48 @@ const Title = styled.div`
     text-align: center;
 `
 
-
-
-function ReminderHead() {
-
-    function randomValueFromArray(array) {
-        let random = Math.floor(Math.random() * array.length);
-        return array[random];
-      }
+const PhraseStyle = {
+    display: "inline-flex",
+    justifyContent: "center",
+    boxSizing: "border-box",
+    width: "300px",
+    margin: "7px",
+    border: "solid orange 5px",
+    borderRadius: "10px",
+    backgroundColor: "white",
+    fontSize: "50PX",
     
-    let list = JSON.parse(localStorage.getItem('listArr'))
-    if(list == null){
-        let list = ['리스트를 작성해주세요'];
-        let randomItem = randomValueFromArray(list);
-    } else 
-    {
-        let randomItem = randomValueFromArray(list);
 }
 
 
-      return (
+function ReminderHead() {
+    // useState
+    const [randomItem, setRandomItem] = useState([]);
+    const [list, setList] = useState([]);
+
+    // function
+    function randomValueFromArray(array) {
+        let random = Math.floor(Math.random() * array.length);
+        if(array.length > 0) {
+        return array[random]; }
+      }
+    
+    useEffect (() => {}, [])
+    
+    // let list = JSON.parse(localStorage.getItem('listArr'));
+    // let randomItem = randomValueFromArray(list);
+    
+    //useEffect
+
+      return ( 
           <ReminderHeadBlock>
               <Title>
                   <h1>Random Reminder</h1>
               </Title>
               <br />
               <div>
-                  <span className='phrase'>{randomItem}</span>
-                  <button onClick={randomValueFromArray(list)}>shuffle</button>
+                  <span style={PhraseStyle}>{randomItem}</span>
+                  <button onClick= {() => {randomValueFromArray(list)}}>shuffle</button>
               </div>
           </ReminderHeadBlock>
           
