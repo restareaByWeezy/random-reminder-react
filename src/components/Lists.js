@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components';
+import { BsTrash } from 'react-icons/bs';
 
 const ListWrapper = styled.div `
     display: flex;
@@ -14,28 +15,40 @@ const ListWrapper = styled.div `
     position: relative;
     left: 20%;
 `
+
+
 //props로받아와서 리스트 랜더링
 
 function Lists(props) {
+    const removeItem = (paraIndex) => {
+        props.list.filter(item => item[paraIndex])
+    }
+
     function listItem () {
-        props.list.map((item, index) =>
-    <li key={index}>{item}</li>
-); 
+        return props.list.map((item, index) =>
+    <div>
+        <li key={index}><button onClick={removeItem({index})}><BsTrash /></button> {item} </li>
+    </div>); 
     }
     
-//     let listItem = props.list.map((item, index) =>
-//     <li key={index}>{item}</li>
-// ); 
 
-    useEffect(()=>{console.log('123')},[props.list]
+    useEffect(()=>{},[props.list]
     )
 
     return (
         <ListWrapper>
-            <ul style= {{listStyle: "none"}}>{listItem}</ul>
+            <ul style= {{listStyle: "none"}}>{listItem()}</ul>
         </ListWrapper>
 
     )
 }
 
 export default Lists;
+
+
+// const onRemove = useCallback(
+//     (id) => {
+//       setTodos(todos.filter((todo) => todo.id !== id));
+//     },
+//     [todos],
+//   );

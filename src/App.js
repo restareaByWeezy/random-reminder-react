@@ -21,7 +21,7 @@ function App() {
 
   return (
       <ReminderTemplate>
-        <ReminderHead></ReminderHead>
+        <ReminderHead list={list} setList={setList}></ReminderHead>
         <ListCreate list={list} setList={setList}></ListCreate>
         <Lists list={list} setList={setList}></Lists>
       </ReminderTemplate>
