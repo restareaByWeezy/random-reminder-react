@@ -32,3 +32,4 @@ function App() {
 export default App;
 
 //app에서 setList만들어서 props로 넘기기
+

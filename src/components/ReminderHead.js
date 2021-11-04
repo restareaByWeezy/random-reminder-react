@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 
 const ReminderHeadBlock = styled.div`
@@ -26,7 +26,9 @@ const Phrase = {
     border: "solid orange 5px",
     borderRadius: "10px",
     backgroundColor: "white",
-    fontSize: "50PX"
+    fontSize: "50PX",
+    justifyContent: "center",
+    textAlign: "center"
 }
 
 const ButtonStyle= {
@@ -51,8 +53,8 @@ function ReminderHead(props) {
         return array[random]; }
       }
 
-    const shuffleItem = () => {setRandomItem(randomValueFromArray(props.list))};
-
+    const shuffleItem = useCallback(()=> setRandomItem(randomValueFromArray(props.list)),[props.list]);
+    // 왜 함수로 다시 감싸줘야됨...??
     return ( 
           <ReminderHeadBlock>
               <Title>
@@ -60,8 +62,10 @@ function ReminderHead(props) {
               </Title>
               <br />
               <PhraseWrapper>
-                  <div style={Phrase}>{shuffleItem}</div>
-                  <button style={ButtonStyle} onClick={shuffleItem}>SHUFFLE</button>
+                  <div style={Phrase}>{randomValueFromArray(props.list)}</div>
+                  {/* {randomItem}얘는 왜 안됨? */}
+                  <button style={ButtonStyle} onClick={()=> {shuffleItem()}} >SHUFFLE</button>
+                  {/* 왜 되지...???? ㅋㅋㅋ */}
               </PhraseWrapper>
           </ReminderHeadBlock>
           

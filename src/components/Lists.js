@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { BsTrash } from 'react-icons/bs';
 
@@ -20,20 +20,21 @@ const ListWrapper = styled.div `
 //props로받아와서 리스트 랜더링
 
 function Lists(props) {
-    const removeItem = (paraIndex) => {
-        props.list.filter(item => item[paraIndex])
+
+    const removeItem = (index) => {
+        props.list.filter(item => item.index !== index)
     }
+    
 
     function listItem () {
         return props.list.map((item, index) =>
     <div>
-        <li key={index}><button onClick={removeItem({index})}><BsTrash /></button> {item} </li>
+        <li key={index}><button onClick={() =>removeItem({index})}><BsTrash /></button> {item} </li>
     </div>); 
     }
     
+    
 
-    useEffect(()=>{},[props.list]
-    )
 
     return (
         <ListWrapper>
