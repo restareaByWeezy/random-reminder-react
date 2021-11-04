@@ -20,16 +20,20 @@ const ListWrapper = styled.div `
 //props로받아와서 리스트 랜더링
 
 function Lists(props) {
+    const removeItem = (removeIndex) => {
+        const filteredList = props.list.filter((item, index) => {
+            if(removeIndex !== index) {
+                return item;
+            }
+        });
+        props.setList(filteredList);
+    } 
 
-    const removeItem = (index) => {
-        props.list.filter(item => item.index !== index)
-    }
     
-
     function listItem () {
         return props.list.map((item, index) =>
     <div>
-        <li key={index}><button onClick={() =>removeItem({index})}><BsTrash /></button> {item} </li>
+        <li key={index}><button onClick={() =>removeItem(index)}><BsTrash /></button> {item} </li>
     </div>); 
     }
     
@@ -46,10 +50,3 @@ function Lists(props) {
 
 export default Lists;
 
-
-// const onRemove = useCallback(
-//     (id) => {
-//       setTodos(todos.filter((todo) => todo.id !== id));
-//     },
-//     [todos],
-//   );

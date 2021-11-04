@@ -40,8 +40,10 @@ const addButtonStyle = {
 }
 
 function ListCreate(props) {
+    //useState
     const [text, setText] = useState('');
 
+    //function
     const onChange = (e) => {
         setText(e.target.value);
       };
@@ -51,12 +53,14 @@ function ListCreate(props) {
         //------------------
             array.push(text);
             props.setList(array);
-            localStorage.setItem('listArr', JSON.stringify(array))
+            props.setIsInitial(false);
     }
+
+
     return (
         <ListCreateBlock>
             <input style= {ListCreateInputStyle} onChange={onChange} value={text}  />
-            <button style={addButtonStyle} onClick={handleClick}><MdAddTask /></button>
+            <button style={addButtonStyle} onClick={handleClick} ><MdAddTask /></button>
         </ListCreateBlock>
     )
 }

@@ -7,6 +7,7 @@ import Lists from './components/Lists';
 function App() {
   //useState
   const [list, setList] = useState([]);
+  const [isInitial, setIsInitial] = useState(true);
   
   //useEffect
   useEffect (() => {
@@ -19,10 +20,15 @@ function App() {
 } 
 , [])
 
+
+  useEffect(() => {
+    localStorage.setItem('listArr', JSON.stringify(list));
+  }, [list])
+
   return (
       <ReminderTemplate>
-        <ReminderHead list={list} setList={setList}></ReminderHead>
-        <ListCreate list={list} setList={setList}></ListCreate>
+        <ReminderHead list={list} setList={setList} isInitial={isInitial} setIsInitial={setIsInitial}></ReminderHead>
+        <ListCreate list={list} setList={setList} isInitial={isInitial}  setIsInitial={setIsInitial}></ListCreate>
         <Lists list={list} setList={setList}></Lists>
       </ReminderTemplate>
   )
